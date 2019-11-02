@@ -23,7 +23,7 @@
   	</ul>
  </c:forEach>
  
- 
+  
    <%-- <p>The result is: ${result.title}</p> --%>
    <ul>
    	<li> Description:${result.description} </li>

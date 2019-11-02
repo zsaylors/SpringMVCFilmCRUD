@@ -72,7 +72,7 @@ public class filmController {
 		mv.setViewName("WEB-INF/updateFilm.jsp"); // redirect to new mapping
 		return mv;
 	}
-
+//
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(Film film) {
 		System.out.println(film);

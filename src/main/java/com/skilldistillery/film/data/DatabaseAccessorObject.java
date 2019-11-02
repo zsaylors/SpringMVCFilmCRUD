@@ -38,7 +38,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 //				"JOIN film_category ON film.id = film_category.film_id\n" + // adds film category
 //				"JOIN category ON film_category.category_id = category.id\n"; // adds film category
 	}
-
+//
 	// CREATES FILM OBJECT
 	// added to not repeat and ease to edit in future.
 	private Film createFilm(ResultSet rs, Film film, int filmId) throws SQLException {
