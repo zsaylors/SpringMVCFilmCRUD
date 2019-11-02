@@ -259,6 +259,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			throw new RuntimeException("Error inserting actor " + film);
 		}
+		System.out.println(film.getId());
 		return film;
 	}
 
