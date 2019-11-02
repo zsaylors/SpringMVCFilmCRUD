@@ -32,9 +32,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// Note: Specific where statements are concatenated in their respective methods.
 	// added to not repeat and ease to edit in future.
 	private String setSql() {
-		return "select * FROM film \n" + "JOIN language ON film.language_id = language.id\n" + // adds language category
-				"JOIN film_category ON film.id = film_category.film_id\n" + // adds film category
-				"JOIN category ON film_category.category_id = category.id\n"; // adds film category
+		return "select * FROM film "; 
+//				+ 
+//				"JOIN language ON film.language_id = language.id\n" + // adds language category
+//				"JOIN film_category ON film.id = film_category.film_id\n" + // adds film category
+//				"JOIN category ON film_category.category_id = category.id\n"; // adds film category
 	}
 
 	// CREATES FILM OBJECT
@@ -54,8 +56,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		film.setRating(rs.getString("rating"));
 		film.setSpecialFeatures(rs.getString("special_features"));
 		film.setActorList(findActorsByFilmId(filmId));
-		film.setLanguage(rs.getString("language.name"));
-		film.setCategory(rs.getString("category.name"));
+		film.setActorList(findActorsByFilmId(filmId));
+		
+//		film.setLanguage(rs.getString("language.name"));
+//		film.setCategory(rs.getString("category.name"));
 		return film;
 	}
 
@@ -259,23 +263,25 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			throw new RuntimeException("Error inserting actor " + film);
 		}
-		System.out.println(film.getId());
+		System.out.println("new film id="+ film.getId()+"*********");
 		return film;
 	}
 
-	public boolean deleteFilm(Film film) {
+	public boolean deleteFilm(int filmid) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
 			String sql = "DELETE FROM film_actor WHERE film_id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, film.getId());
+			stmt.setInt(1, filmid);
 			int updateCount = stmt.executeUpdate();
-			sql = "DELETE FROM film WHERE id = ?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, film.getId());
+			String deletesql = "DELETE FROM film WHERE id = ?";
+			stmt = conn.prepareStatement(deletesql);
+			stmt.setInt(1, filmid);
 			updateCount = stmt.executeUpdate();
+			conn.commit();
+			System.out.println("****after execute***");
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
