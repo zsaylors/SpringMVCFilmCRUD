@@ -15,7 +15,8 @@ import com.skilldistillery.film.entities.Inventory;
 import com.skilldistillery.film.entities.Store;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
-	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
+	//private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
+	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false";
 	private String user = "student";
 	private String pass = "student";
 
@@ -207,7 +208,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// FILM QUERY PROJECT CONTINUED - WEEK 2
 	// ORM for DML Lab
 
-	public Film creatFilm(Film film) {
+	public Film createFilm(Film film) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);

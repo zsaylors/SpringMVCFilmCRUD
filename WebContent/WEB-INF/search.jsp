@@ -5,9 +5,9 @@
 <html lang="en">
  <head>
    <meta charset="UTF-8">
-   <title>View</title>
+   <title>IMDb</title>
  </head>
  <body>
-   <p>The result is: ${result}</p>
+   <p>The result is: ${result.title}</p>
  </body>
 </html>
