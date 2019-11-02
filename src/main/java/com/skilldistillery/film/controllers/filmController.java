@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.skilldistillery.film.data.DatabaseAccessor;
 import com.skilldistillery.film.data.DatabaseAccessorObject;
 import com.skilldistillery.film.entities.Film;
 

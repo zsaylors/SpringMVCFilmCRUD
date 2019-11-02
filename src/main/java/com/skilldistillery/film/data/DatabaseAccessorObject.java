@@ -55,8 +55,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		film.setReplacementCost(rs.getDouble("replacement_cost"));
 		film.setRating(rs.getString("rating"));
 		film.setSpecialFeatures(rs.getString("special_features"));
-		film.setActorList(findActorsByFilmId(filmId));
-		film.setActorList(findActorsByFilmId(filmId));
+		film.setFilmActors(findActorsByFilmId(filmId));
+		film.setCategory(findCategoryById(filmId));
+//		film.setActorList(findActorsByFilmId(filmId));
 		
 //		film.setLanguage(rs.getString("language.name"));
 //		film.setCategory(rs.getString("category.name"));
@@ -152,6 +153,30 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			e.printStackTrace();
 		}
 		return actors;
+	}
+	
+	public String findCategoryById(int filmId) {
+		String category = "a";
+		String sql = "SELECT category.name FROM film_category\n" + 
+				"JOIN film ON film.id = film_category.film_id\n" + 
+				"JOIN category ON film_category.category_id = category.id \n" + 
+				"WHERE film.id = ?";
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+			category = rs.getString("category.name");
+			
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return category;
 	}
 
 	// CREATES AN INVENTORY LIST SPECIFIC TO A FILM.

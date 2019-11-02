@@ -35,6 +35,9 @@
    	<li> Description:${result.replacementCost} </li>
    	<li> Description:${result.rating} </li>
    	<li> Description:${result.specialFeatures} </li>
+   	<li> Description:${result.filmActors} </li>
+   	<li> Description:${result.category} </li>
+   	
    	
    <a href="addVideo.html">Add Video</a>
    <form action="delete.do" method="POST">

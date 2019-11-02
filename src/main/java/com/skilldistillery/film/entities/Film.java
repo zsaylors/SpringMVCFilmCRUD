@@ -111,12 +111,6 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
-	public List<Actor> getActorList() {
-		return filmActors;
-	}
-	public void setActorList(List<Actor> filmActors) {
-		this.filmActors = filmActors;
-	}
 	public String getLanguage() {
 		return language;
 	}
@@ -128,6 +122,12 @@ public class Film {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public List<Actor> getFilmActors() {
+		return filmActors;
+	}
+	public void setFilmActors(List<Actor> filmActors) {
+		this.filmActors = filmActors;
 	}
 
 	@Override
