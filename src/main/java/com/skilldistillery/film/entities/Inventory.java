@@ -8,7 +8,7 @@ public class Inventory {
 	private String mediaCondition;
 	private String lastUpdate;
 	private Store storeLocation;
-	
+	 
 	//C O N S T R U C T O R S
 	public Inventory() {}
 	

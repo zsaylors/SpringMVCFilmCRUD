@@ -1,5 +1,5 @@
 package com.skilldistillery.film.entities;
-
+ 
 public class Actor {
 	//F I E L D S
 	private int id;
