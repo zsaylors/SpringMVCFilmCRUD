@@ -27,7 +27,7 @@
 
 	<div class="container">
 	<br>
-	<div class="alert alert-danger" role="alert">The film was unable to be deleted since it is a default database film.</div>
+	<div class="alert alert-danger" role="alert">Film not found! Try again.</div>
 			<a class="btn btn-outline-dark"
 					href="index.html"> Return Home </a>
 	</div>

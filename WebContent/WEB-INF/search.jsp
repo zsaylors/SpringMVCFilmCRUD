@@ -83,9 +83,9 @@
 						</table>
 					</div>
 				</div>
+
 			
-			
-						<div class="text-center">
+			<div class="text-center">
 				<div class="btn-group">
 					<form action="delete.do" method="POST" class="bottom__buttons">
 						<input type="hidden" name="filmIdDelete" value="${result.id }">
@@ -210,37 +210,23 @@
 			<div class="collapse" id="collapseUpdateFilm">
 				<div class="card card-body">
 					<form action="update.do" method="POST">
-						<input type="hidden" name="id" value="${result.id}" /> Title <input
-							class="form-control add__form" type="text" name="title"
-							value="${result.title}" required /><br> Description<input
-							class="form-control add__form" type="text" name="description"
-							value="${result.description}" /><br> Release Year <input
-							class="form-control add__form" type="number" name="releaseYear"
-							value="${result.releaseYear}" required /><br> Language Id<input
-							class="form-control add__form" type="number" name="languageId"
-							value="${result.languageId}" required /><br> Rental Duration<input
-							class="form-control add__form" type="number"
-							name="rentalDuration" value="${result.rentalDuration}" required /><br>
-						Rental Rate<input class="form-control add__form" name="rentalRate"
-							value="${result.rentalRate}" required /><br> Length<input
-							class="form-control add__form" type="number" name="length"
-							required value="${result.length}" required /><br>
-						Replacement Cost<input class="form-control add__form"
-							name="replacementCost" value="${result.replacementCost}" required /><br>
-						Rating<input class="form-control add__form" type="text"
-							name="rating" value="${result.rating}" /><br> Special
-						Features<input class="form-control add__form" type="text"
-							name="specialFeatures" value="${result.specialFeatures}" /><br>
-						<input class="btn btn-outline-success" type="submit"
-							value="Submit" /><br />
+						<input type="hidden" name="id" value="${result.id}"> 
+						Title <input class="form-control" type="text" name="title" value="${result.title}" required><br> 
+						Description <input class="form-control" type="text" name="description" value="${result.description}"><br>
+					 	Release Year <input class="form-control" type="number" name="releaseYear" value="${result.releaseYear}" required><br> 
+						Language Id<input class="form-control" type="number" name="languageId" min="1" max="6" value="${result.languageId}" required ><br>	
+						Rental Duration<input class="form-control" type="number" name="rentalDuration" value="${result.rentalDuration}" required><br>
+						Rental Rate<input class="form-control" type="number" step="any" name="rentalRate" value="${result.rentalRate}" required><br> 
+						Length<input class="form-control" type="number" name="length" required value="${result.length}" required><br>
+						Replacement Cost<input class="form-control" type="number" step="any" name="replacementCost" value="${result.replacementCost}" required><br>
+						Rating<input class="form-control" type="text" name="rating" value="${result.rating}"><br>
+						Special Features<input class="form-control" type="text" name="specialFeatures" value="${result.specialFeatures}"><br>
+						<input class="btn btn-outline-success" type="submit" value="Submit"><br>
 					</form>
 				</div>
 			</div>
 		</c:if>
 
-		<c:if test="${result.title == null}">
-			<p>That film does not exist! Try again.</p>
-		</c:if>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

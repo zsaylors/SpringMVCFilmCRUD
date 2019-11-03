@@ -25,8 +25,13 @@ public class filmController {
 		ModelAndView mv = new ModelAndView();
 		Film f = dao.findFilmById(id);
 		System.out.println("film that is being displayed" + f);
-		mv.addObject("result", f);
-		mv.setViewName("WEB-INF/search.jsp");
+		
+		if (f == null) {
+			mv.setViewName("WEB-INF/filmNotFound.jsp");
+		} else {
+			mv.addObject("result", f);
+			mv.setViewName("WEB-INF/search.jsp");
+		}
 		return mv;
 	}
 
@@ -83,9 +88,12 @@ public class filmController {
 	public ModelAndView getFilmBySearch(@RequestParam("keywords") String keyword) {
 		ModelAndView mv = new ModelAndView();
 		List<Film> k = dao.findFilmByKeyword(keyword);
-		System.out.println("film that is being displayed" + k);
-		mv.addObject("results", k);
-		mv.setViewName("WEB-INF/search.jsp");
+		if (k.size() != 0) {
+			mv.addObject("results", k);
+			mv.setViewName("WEB-INF/search.jsp");
+		} else {
+			mv.setViewName("WEB-INF/filmNotFound.jsp");
+		}
 		return mv;
 	}
 }

@@ -158,7 +158,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	public String findCategoryById(int filmId) {
-		String category = "a";
+		String category = "none";
 		String sql = "SELECT category.name FROM film_category\n" + "JOIN film ON film.id = film_category.film_id\n"
 				+ "JOIN category ON film_category.category_id = category.id \n" + "WHERE film.id = ?";
 		try {
