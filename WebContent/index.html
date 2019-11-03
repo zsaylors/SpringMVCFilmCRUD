@@ -1,25 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <title>Title</title>
- </head>
- <body>
-   Search by Film Id#<form action="route.do" method="GET">
-     <input type="number" name="data" /><br />
-     <input type="submit" value="Submit" /><br />
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<title>IMDb 2!</title>
+</head>
+
+<body id="home__page">
+	<!-- NAVBAR - currently only has title image -->
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+		<a class="navbar-brand" href="#"> <img class="title__img"
+			src="imdb2.png">
+		</a>
+	</nav>
+
+	<div class="container search__box text-center" id="myGroup">
+		<div class="container" id=myGroup>
+			<p>
+				<a class="btn btn-outline-dark" data-toggle="collapse"
+					href="#collapseExample" role="button" aria-expanded="true"
+					aria-controls="collapseExample"> Search by ID </a>
+				<button class="btn btn-outline-dark" type="button"
+					data-toggle="collapse" data-target="#collapseExample2"
+					aria-expanded="false" aria-controls="collapseExample2">
+					Search by keyword</button>
+				<button class="btn btn-outline-dark" type="button"
+					data-toggle="collapse" data-target="#collapseExample3"
+					aria-expanded="false" aria-controls="collapseExample3">
+					Add a video</button>
+			</p>
+
+			<div class="collapse show" id="collapseExample"
+				data-parent="#myGroup">
+				<div class="card card-body">
+					<form action="route.do" method="GET" id="sbd">
+						<div class="input-group">
+							<input class="form-control" type="number" name="data"
+								placeholder="Search by ID"> <span
+								class="input-group-btn"> <input
+								class="btn btn-outline-success" type="submit" value="Submit" />
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="collapse" id="collapseExample2" data-parent="#myGroup">
+				<div class="card card-body">
+					<form action="search.do" method="GET" id="sbk">
+						<div class="input-group">
+							<input class="form-control" type="text" name="keywords"
+								placeholder="Search by keyword"> <span
+								class="input-group-btn"> <input
+								class="btn btn-outline-success" type="submit" value="Submit">
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="collapse" id="collapseExample3" data-parent="#myGroup">
+				<div class="card card-body">
+					<form action="add.do" method="POST">
+
+						<input class="form-control" type="text" name="title"
+							placeholder="Title" required><br> <input
+							class="form-control" type="text" name="description"
+							placeholder="Description"><br> <input
+							class="form-control" type="number" min="1888"
+							max="2019" name="releaseYear" placeholder="Release Year" required><br>
+						<!--      <input class="form-control add__form" type="number" name="languageId" placeholder="Language Id"><br> -->
+						<div class="form-group">
+							<select name="languageId" class="form-control">
+								<option value="1">English</option>
+								<option value="2">Italian</option>
+								<option value="3">Japanese</option>
+								<option value="4">Mandarin</option>
+								<option value="5">French</option>
+								<option value="6">German</option>
+							</select>
+						</div>
+						<input class="form-control" type="number" min="1"
+							max="7" name="rentalDuration" placeholder="Rental Duration"
+							required><br> 
+						<input class="form-control"
+							type="number" min="0" name="rentalRate" placeholder="Rental Rate"
+							required><br> 
+						<input class="form-control"
+							type="number" min="1" name="length" placeholder="Length" required><br>
+						<input class="form-control" type="number" min="0"
+							name="replacementCost" placeholder="Replacement Cost" required><br>
+						<div class="form-group">
+							<select name="rating" class="form-control">
+								<option value="G">G</option>
+								<option value="PG">PG</option>
+								<option value="PG13">PG-13</option>
+								<option value="R">R</option>
+								<option value="NC17">NC-17</option>
+							</select>
+						</div>
+<!-- 						<input class="form-control" type="text" name="specialFeatures"
+							placeholder="Special Features"><br>  -->
+						Special Features:<br>
+							<input type="checkbox" name="specialFeatures" value="Trailers"> Trailers  
+							<input type="checkbox" name="specialFeatures" value="Commentaries"> Commentaries  
+							<input type="checkbox" name="specialFeatures" value="Deleted Scenes"> Deleted Scenes  
+							<input type="checkbox" name="specialFeatures" value="Behind the Scenes"> Behind the Scenes
+							
+							<br>
+						
+							
+							
+							
+							<input
+							class="btn btn-outline-success" type="submit" value="Submit"><br />
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!--
+ BUTTON GOUP - currently contains three menu items 
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" data-target=".multi-collapse" data-parent="#myGroup">
+            Search by ID 
+            </button>
+
+            <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" data-target=".multi-collapse" data-parent="#myGroup">
+            Search by keyword  
+            </button>
+
+            <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" data-target=".multi-collapse" data-parent="#myGroup">
+            Add a video 
+            </button>   
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="collapse" id="multiCollapseExample1">
+                    <div class="card card-body">
+        	           <form action="route.do" method="GET" id="sbd">
+                            <div class="input-group">  
+                                <input class="form-control" type="number" name="data">
+                                <span class="input-group-btn">
+                                    <input class="btn btn-outline-success" type="submit" value="Submit" />
+                                </span>
+                            </div> 
+	                   </form>
+                    </div>
+                </div>
+
+                <div class="collapse" id="multiCollapseExample2">
+                    <div class="card card-body">
+        	           <form action="search.do" method="GET" id="sbk">
+                           <div class="input-group"> 
+                               <input class="form-control" type="text" name="keywords" />
+                               <span class="input-group-btn">
+                                    <input class="btn btn-outline-success" type="submit" value="Submit">
+                               </span>
+                           </div>
+	                   </form>
+                    </div>
+                </div>
+                
+                <div class="collapse text-left" id="multiCollapseExample3">
+                    <div class="card card-body">
+        	              <form action="add.do" method="POST">
+   	
+     <input class="form-control add__form" type="text" name="title" placeholder="Title"><br>
+     <input class="form-control add__form" type="text" name="description" placeholder="Description"><br>
+     <input class="form-control add__form" type="number" name="releaseYear" placeholder="Release Years"><br>
+     <input class="form-control add__form" type="number" name="languageId" placeholder="Language Id"><br>
+     <input class="form-control add__form" type="number" name="rentalDuration" placeholder="Rental Duration"><br>
+     <input class="form-control add__form" type="number" name="rentalRate" placeholder="Rental Rate"><br>
+     <input class="form-control add__form" type="number" name="length" placeholder="Length"><br>
+     <input class="form-control add__form" type="number" name="replacementCost" placeholder="Replacement Cost"><br>
+     <input class="form-control add__form" type="text" name="rating" placeholder="Rating"><br> 
+     <input class="form-control add__form" type="text" name="specialFeatures" placeholder="Special Features"><br>
+     <input class="btn btn-outline-success" type="submit" value="Submit"><br />
    </form>
-   Search by Keyword <form action="search.do" method="GET">
-     <input type="text" name="keywords" /><br />
-     <input type="submit" value="Submit" /><br />
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+-->
+
+		<!--
+    
+    <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Search by ID:
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+                	           <form action="route.do" method="GET" id="sbd">
+                            <div class="input-group">  
+                                <input class="form-control" type="number" name="data">
+                                <span class="input-group-btn">
+                                    <input class="btn btn-outline-success" type="submit" value="Submit" />
+                                </span>
+                            </div> 
+	                   </form>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Search by Keyword:
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+         <form action="search.do" method="GET" id="sbk">
+                           <div class="input-group"> 
+                               <input class="form-control" type="text" name="keywords" />
+                               <span class="input-group-btn">
+                                    <input class="btn btn-outline-success" type="submit" value="Submit">
+                               </span>
+                           </div>
+	                   </form>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Add a film:
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+              	              <form action="add.do" method="POST">
+   	
+     <input class="form-control add__form" type="text" name="title" placeholder="Title"><br>
+     <input class="form-control add__form" type="text" name="description" placeholder="Description"><br>
+     <input class="form-control add__form" type="number" name="releaseYear" placeholder="Release Years"><br>
+     <input class="form-control add__form" type="number" name="languageId" placeholder="Language Id"><br>
+     <input class="form-control add__form" type="number" name="rentalDuration" placeholder="Rental Duration"><br>
+     <input class="form-control add__form" type="number" name="rentalRate" placeholder="Rental Rate"><br>
+     <input class="form-control add__form" type="number" name="length" placeholder="Length"><br>
+     <input class="form-control add__form" type="number" name="replacementCost" placeholder="Replacement Cost"><br>
+     <input class="form-control add__form" type="text" name="rating" placeholder="Rating"><br> 
+     <input class="form-control add__form" type="text" name="specialFeatures" placeholder="Special Features"><br>
+     <input class="btn btn-outline-success" type="submit" value="Submit"><br />
    </form>
-      
-   <a href="addVideo.html">Add Video</a>
-   
-<!--    
-                   <form action="getFilmById.do" method="get">
-                        <input type="number" name="filmId" min="${low }" max="${hi }"/>
-                        <input type="submit" value="Search by Id" />
-                </form> -->
- </body>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+	</div>
+
+
+
+
+	<!--	<a href="addVideo.html">Add Video</a>-->
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
 </html>

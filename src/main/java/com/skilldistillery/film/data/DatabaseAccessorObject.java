@@ -121,8 +121,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			while (rs.next()) {
 				actor = new Actor();
 				actor.setId(rs.getInt("id"));
-				actor.setFirst_name(rs.getString("first_name"));
-				actor.setLast_name(rs.getString("last_name"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,8 +144,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			while (rs.next()) {
 				Actor actor = new Actor();
 				actor.setId(rs.getInt("id"));
-				actor.setFirst_name(rs.getString("first_name"));
-				actor.setLast_name(rs.getString("last_name"));
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
 				actors.add(actor);
 			}
 			rs.close();

@@ -1,0 +1,107 @@
+body {
+	background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+		url(https://images.pexels.com/photos/65128/pexels-photo-65128.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+	background-size:cover;
+	background-position:center;
+    background-attachment: fixed;
+
+}
+
+#home__page {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)),
+		url(https://images.pexels.com/photos/133070/pexels-photo-133070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+}
+.navbar {
+    background-color: rgba(23, 23, 23, 0.9);
+}
+
+.navbar-brand {
+    color: #000;
+    font-weight:700;
+}
+
+.title__img {
+    height: 10vh;
+}
+
+.search__box {
+    margin: 30px auto;
+}
+
+.add__form {
+    margin-bottom: -18px;
+}
+
+ul {
+    list-style: none;
+}
+
+table {
+    border-collapse:separate;
+}
+
+tr, td {
+	border:solid transparent 2px;
+    margin: 2px;
+	 border-radius: 5px;
+}
+
+.desc {
+	background-color: rgb(255, 255, 255);
+    width: 50%;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+.dec_c {
+    background-color: rgba(255, 255, 255, 0.90);
+    padding-left: 10px;
+}
+
+.tab1 {
+    display:flex;
+}
+
+.disptab {
+
+}
+
+.rightside {
+    display: inline-block;
+    background-color: aqua;
+}
+
+h1 {
+	font-size: 25px;
+    color: #00762d;
+} 
+
+h2 {
+	font-size: 15px;
+}
+
+.leftside {
+	display: inline-block;
+    background-color: #4b6464
+}
+
+.bottom__buttons {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.style__box {
+	background-color: rgba(67, 67, 67, 0);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.cont__style {
+	background-color: rgba(168, 168, 168, 0.1);
+	padding: 10px;
+	margin-bottom: 50px;
+	border-radius: 5px;
+}
+
+/*https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80*/

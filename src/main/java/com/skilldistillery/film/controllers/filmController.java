@@ -78,7 +78,8 @@ public class filmController {
 		Film filmUpdate = dao.updateFilm(film);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("result", filmUpdate);
-		mv.setViewName("WEB-INF/search.jsp"); // redirect to new mapping
+		mv.setViewName("index.html"); 
+		mv.setViewName("WEB-INF/search.jsp"); 
 		return mv;
 	}
 
@@ -91,11 +92,4 @@ public class filmController {
 		mv.setViewName("WEB-INF/search.jsp");
 		return mv;
 	}
-//	@RequestMapping(path = "filmAdded.do", // mapping to handle Redirect
-//			method = RequestMethod.GET)
-//	public ModelAndView created() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("WEB-INF/search.jsp");
-//		return mv;
-//	}
 }

@@ -1,65 +1,259 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>IMDb</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<title>IMDb 2!</title>
 </head>
+
 <body>
-	<c:forEach items="${results}" var="result">
-		<ul>
-			<li>Title:${result.title}</li>
-			<li>Description: ${result.description}</li>
-			<li>Release Year: ${result.releaseYear}</li>
-			<li>Language Id: ${result.languageId}</li>
-			<li>Rental Duration: ${result.rentalDuration}</li>
-			<li>Rental Rate: ${result.rentalRate}</li>
-			<li>Length: ${result.length}</li>
-			<li>Replacement Cost: ${result.replacementCost}</li>
-			<li>Rating: ${result.rating}</li>
-			<li>Special Features: ${result.specialFeatures}</li>
-		</ul>
-	</c:forEach>
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+		<a class="navbar-brand" href="index.html"> <img class="title__img"
+			src="imdb2.png">
+		</a>
+	</nav>
+
+	<div class="container">
+		<c:forEach items="${results}" var="result">
+						<div class="container cont__style" style="margin-top: 15px">
+				<div class="row">
+					<div class="col-sm">
+						<h1>
+							<strong> ${result.title} </strong>
+						</h1>
+						<h2>${result.description}</h2>
+						<h3>
+							<span class="badge badge-dark">${result.rating}</span>
+						</h3>
+
+						<div class="style__box shadow-lg">
+							<strong>Staring:</strong><br>
+							<c:forEach items="${result.filmActors}" var="actor">
+								<span class="badge badge-secondary"> ${actor.firstName}
+									${actor.lastName} </span>
+							</c:forEach>
+						</div>
+						<div class="style__box shadow-lg">
+							<strong>Special Features:</strong><br>
+							${result.specialFeatures}
+						</div>
+						<div class="style__box shadow-lg" style="margin-bottom: 20px">
+							<strong>Category</strong><br> <span class="badge badge-info">
+								${result.category} </span>
+						</div>
+					</div>
+					<div class="col-sm">
+						<table class="table">
+							<tr>
+								<td class="desc shadow">Release Year</td>
+								<td class="dec_c shadow">${result.releaseYear}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Language Id</td>
+								<td class="dec_c shadow">${result.languageId}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Rental Duration</td>
+								<td class="dec_c shadow">${result.rentalDuration}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Rental Rate</td>
+								<td class="dec_c shadow">${result.rentalRate}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Replacement Cost</td>
+								<td class="dec_c shadow">${result.replacementCost}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Length</td>
+								<td class="dec_c shadow">${result.length}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			
+			
+						<div class="text-center">
+				<div class="btn-group">
+					<form action="delete.do" method="POST" class="bottom__buttons">
+						<input type="hidden" name="filmIdDelete" value="${result.id }">
+						<input class="btn btn-secondary" type="submit" value="Delete film">
+					</form>
+					<div>
+						<button class="btn btn-secondary bottom__buttons" type="button"
+							data-toggle="collapse" data-target="#collapseUpdateFilm"
+							aria-expanded="false" aria-controls="collapseExample">
+							Update film</button>
+					</div>
+				</div>
+			</div>
+			<div class="collapse" id="collapseUpdateFilm">
+				<div class="card card-body">
+					<form action="update.do" method="POST">
+						<input type="hidden" name="id" value="${result.id}" /> Title <input
+							class="form-control add__form" type="text" name="title"
+							value="${result.title}" required /><br> Description<input
+							class="form-control add__form" type="text" name="description"
+							value="${result.description}" /><br> Release Year <input
+							class="form-control add__form" type="number" name="releaseYear"
+							value="${result.releaseYear}" required /><br> Language Id<input
+							class="form-control add__form" type="number" name="languageId"
+							value="${result.languageId}" required /><br> Rental Duration<input
+							class="form-control add__form" type="number"
+							name="rentalDuration" value="${result.rentalDuration}" required /><br>
+						Rental Rate<input class="form-control add__form" name="rentalRate"
+							value="${result.rentalRate}" required /><br> Length<input
+							class="form-control add__form" type="number" name="length"
+							required value="${result.length}" required /><br>
+						Replacement Cost<input class="form-control add__form"
+							name="replacementCost" value="${result.replacementCost}" required /><br>
+						Rating<input class="form-control add__form" type="text"
+							name="rating" value="${result.rating}" /><br> Special
+						Features<input class="form-control add__form" type="text"
+							name="specialFeatures" value="${result.specialFeatures}" /><br>
+						<input class="btn btn-outline-success" type="submit"
+							value="Submit" /><br />
+					</form>
+				</div>
+			</div>
+			</div>
+		</c:forEach>
 
 
-	<%-- <p>The result is: ${result.title}</p> --%>
-	<c:if test="${result.title != null}">
-		<ul>
-			<li>Title:${result.title}</li>
-			<li>Description: ${result.description}</li>
-			<li>Release Year: ${result.releaseYear}</li>
-			<li>Language Id: ${result.languageId}</li>
-			<li>Rental Duration: ${result.rentalDuration}</li>
-			<li>Rental Rate: ${result.rentalRate}</li>
-			<li>Length: ${result.length}</li>
-			<li>Replacement Cost: ${result.replacementCost}</li>
-			<li>Rating: ${result.rating}</li>
-			<li>Special Features: ${result.specialFeatures}</li>
-			<li>Actors: ${result.filmActors}</li>
-			<li>Category: ${result.category}</li>
-		</ul>
+<!-- THIS IS THE BEGIN TO GET BY ID -->
+		<%-- <p>The result is: ${result.title}</p> --%>
+		<c:if test="${result.title != null}">
+			<div class="container" style="margin-top: 15px">
+				<div class="row">
+					<div class="col-sm">
+						<h1>
+							<strong> ${result.title} </strong>
+						</h1>
+						<h2>${result.description}</h2>
+						<h3>
+							<span class="badge badge-dark">${result.rating}</span>
+						</h3>
 
-		<form action="delete.do" method="POST">
-			<input type="hidden" name="filmIdDelete" value="${result.id }" /> <input
-				type="submit" value="Delete film" /><br />
-		</form>
+						<div class="style__box shadow-lg">
+							<strong>Staring:</strong><br>
+							<c:forEach items="${result.filmActors}" var="actor">
+								<span class="badge badge-secondary"> ${actor.firstName}
+									${actor.lastName} </span>
+							</c:forEach>
+						</div>
+						<div class="style__box shadow-lg">
+							<strong>Special Features:</strong><br>
+							${result.specialFeatures}
+						</div>
+						<div class="style__box shadow-lg" style="margin-bottom: 20px">
+							<strong>Category</strong><br> <span class="badge badge-info">
+								${result.category} </span>
+						</div>
+					</div>
+					<div class="col-sm">
+						<table class="table">
+							<tr>
+								<td class="desc shadow">Release Year</td>
+								<td class="dec_c shadow">${result.releaseYear}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Language Id</td>
+								<td class="dec_c shadow">${result.languageId}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Rental Duration</td>
+								<td class="dec_c shadow">${result.rentalDuration}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Rental Rate</td>
+								<td class="dec_c shadow">${result.rentalRate}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Replacement Cost</td>
+								<td class="dec_c shadow">${result.replacementCost}</td>
+							</tr>
+							<tr>
+								<td class="desc shadow">Length</td>
+								<td class="dec_c shadow">${result.length}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
 
-		<form action="getFilmToUpdate.do" method="GET">
-			<input type="hidden" name="filmId" value="${result.id}" />
-				<p>${result.id}</p>
-				<input type="submit" value="Update film" /><br />
-		</form>
-	</c:if>
+			<div class="text-center">
+				<div class="btn-group">
+					<form action="delete.do" method="POST" class="bottom__buttons">
+						<input type="hidden" name="filmIdDelete" value="${result.id }">
+						<input class="btn btn-secondary" type="submit" value="Delete film">
+					</form>
+					<div>
+						<button class="btn btn-secondary bottom__buttons" type="button"
+							data-toggle="collapse" data-target="#collapseUpdateFilm"
+							aria-expanded="false" aria-controls="collapseExample">
+							Update film</button>
+					</div>
+				</div>
+			</div>
+			<div class="collapse" id="collapseUpdateFilm">
+				<div class="card card-body">
+					<form action="update.do" method="POST">
+						<input type="hidden" name="id" value="${result.id}" /> Title <input
+							class="form-control add__form" type="text" name="title"
+							value="${result.title}" required /><br> Description<input
+							class="form-control add__form" type="text" name="description"
+							value="${result.description}" /><br> Release Year <input
+							class="form-control add__form" type="number" name="releaseYear"
+							value="${result.releaseYear}" required /><br> Language Id<input
+							class="form-control add__form" type="number" name="languageId"
+							value="${result.languageId}" required /><br> Rental Duration<input
+							class="form-control add__form" type="number"
+							name="rentalDuration" value="${result.rentalDuration}" required /><br>
+						Rental Rate<input class="form-control add__form" name="rentalRate"
+							value="${result.rentalRate}" required /><br> Length<input
+							class="form-control add__form" type="number" name="length"
+							required value="${result.length}" required /><br>
+						Replacement Cost<input class="form-control add__form"
+							name="replacementCost" value="${result.replacementCost}" required /><br>
+						Rating<input class="form-control add__form" type="text"
+							name="rating" value="${result.rating}" /><br> Special
+						Features<input class="form-control add__form" type="text"
+							name="specialFeatures" value="${result.specialFeatures}" /><br>
+						<input class="btn btn-outline-success" type="submit"
+							value="Submit" /><br />
+					</form>
+				</div>
+			</div>
+		</c:if>
 
-	<c:if test="${result.title == null}">
-		<p>That film does not exist! Try again.</p>
-	</c:if>
+		<c:if test="${result.title == null}">
+			<p>That film does not exist! Try again.</p>
+		</c:if>
+	</div>
 
-	<a href="addVideo.html">Add Video</a><br>
-
-	<a href="index.html">Home</a>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
 </html>
 
