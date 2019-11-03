@@ -15,7 +15,8 @@ import com.skilldistillery.film.entities.Inventory;
 import com.skilldistillery.film.entities.Store;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
-	//private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
+	// private static final String URL =
+	// "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false";
 	private String user = "student";
 	private String pass = "student";
@@ -32,12 +33,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// Note: Specific where statements are concatenated in their respective methods.
 	// added to not repeat and ease to edit in future.
 	private String setSql() {
-		return "select * FROM film "; 
+		return "select * FROM film ";
 //				+ 
 //				"JOIN language ON film.language_id = language.id\n" + // adds language category
 //				"JOIN film_category ON film.id = film_category.film_id\n" + // adds film category
 //				"JOIN category ON film_category.category_id = category.id\n"; // adds film category
 	}
+
 //
 	// CREATES FILM OBJECT
 	// added to not repeat and ease to edit in future.
@@ -58,7 +60,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		film.setFilmActors(findActorsByFilmId(filmId));
 		film.setCategory(findCategoryById(filmId));
 //		film.setActorList(findActorsByFilmId(filmId));
-		
+
 //		film.setLanguage(rs.getString("language.name"));
 //		film.setCategory(rs.getString("category.name"));
 		return film;
@@ -154,21 +156,19 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return actors;
 	}
-	
+
 	public String findCategoryById(int filmId) {
 		String category = "a";
-		String sql = "SELECT category.name FROM film_category\n" + 
-				"JOIN film ON film.id = film_category.film_id\n" + 
-				"JOIN category ON film_category.category_id = category.id \n" + 
-				"WHERE film.id = ?";
+		String sql = "SELECT category.name FROM film_category\n" + "JOIN film ON film.id = film_category.film_id\n"
+				+ "JOIN category ON film_category.category_id = category.id \n" + "WHERE film.id = ?";
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-			category = rs.getString("category.name");
-			
+				category = rs.getString("category.name");
+
 			}
 			rs.close();
 			stmt.close();
@@ -262,21 +262,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					int newFilmId = keys.getInt(1);
 					film.setId(newFilmId);
 					System.out.println("New film ID: " + newFilmId);
-					// NEED TO INSERT SOMETHING HERE FORE FOREIGN KEYS???
-//					if (actor.getFilms() != null && actor.getFilms().size() > 0) {
-//						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-//						stmt = conn.prepareStatement(sql);
-//						for (Film film : actor.getFilms()) {
-//							stmt.setInt(1, film.getId());
-//							stmt.setInt(2, newActorId);
-//							updateCount = stmt.executeUpdate();
-//						}
-//					}
 				}
 			} else {
 				film = null;
 			}
-			conn.commit(); // COMMIT TRANSACTION
+			conn.commit(); 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -288,7 +278,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			throw new RuntimeException("Error inserting actor " + film);
 		}
-		System.out.println("new film id="+ film.getId()+"*********");
+		System.out.println("new film id=" + film.getId() + "*********");
 		return film;
 	}
 
@@ -321,12 +311,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return true;
 	}
 
-	public boolean updateFilm(Film film) {
+	public Film updateFilm(Film film) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
-			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "UPDATE film SET title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=? WHERE id=?";
+			conn.setAutoCommit(false);
+			String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, language_id = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?, rating = ?, special_features = ? WHERE id = ?";
+
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, film.getTitle());
 			stmt.setString(2, film.getDescription());
@@ -340,53 +331,23 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setString(10, film.getSpecialFeatures());
 			stmt.setInt(11, film.getId());
 			int updateCount = stmt.executeUpdate();
+			
 			if (updateCount == 1) {
-				// Replace actor's film list
-				
-				
-//				sql = "DELETE FROM film_actor WHERE film_id = ?";
-//				stmt = conn.prepareStatement(sql);
-//				stmt.setInt(1, actor.getId());
-//				updateCount = stmt.executeUpdate();
-//				sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-//				sql = "DELETE FROM film_actor WHERE film_id = ?";
-				sql = "DELETE FROM film WHERE film_id = ?";
-				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, film.getId());
-				updateCount = stmt.executeUpdate();
-				sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
-				
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, film.getTitle());
-				stmt.setString(2, film.getDescription());
-				stmt.setInt(3, film.getReleaseYear());
-				stmt.setInt(4, film.getLanguageId());
-				stmt.setInt(5, film.getRentalDuration());
-				stmt.setDouble(6, film.getRentalRate());
-				stmt.setInt(7, film.getLength());
-				stmt.setDouble(8, film.getReplacementCost());
-				stmt.setString(9, film.getRating());
-				stmt.setString(10, film.getSpecialFeatures());
-//				for (Film film : film.getFilms()) {
-//					stmt.setInt(1, film.getId());
-//					stmt.setInt(2, film.getId());
-//					updateCount = stmt.executeUpdate();
-//				}
-				updateCount = stmt.executeUpdate();
-				conn.commit(); // COMMIT TRANSACTION
+				conn.commit(); 
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
 				try {
 					conn.rollback();
-				} // ROLLBACK TRANSACTION ON ERROR
+				} 
 				catch (SQLException sqle2) {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			return false;
+			System.out.println(film.getId() + "&&&");
+			return film;
 		}
-		return true;
+		return film;
 	}
 }

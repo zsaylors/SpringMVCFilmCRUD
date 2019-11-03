@@ -62,7 +62,7 @@ public class filmController {
 		return mv;
 	}
 
-	@RequestMapping(path = "getfilmtoupdate.do", method = RequestMethod.GET)
+	@RequestMapping(path = "getFilmToUpdate.do", method = RequestMethod.GET)
 	public ModelAndView getFilmToUpdate(int filmId) {
 		Film foundFilm = dao.findFilmById(filmId);
 		ModelAndView mv = new ModelAndView();
@@ -74,12 +74,10 @@ public class filmController {
 //
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(Film film) {
-		System.out.println(film);
-		boolean filmUpdate = dao.updateFilm(film);
+		System.out.println("update.do to zero?"+ film);
+		Film filmUpdate = dao.updateFilm(film);
 		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("WEB-INF/addVideo.jsp");
-//		mv.addObject("result", filmDelete);
-		mv.addObject("result", film);
+		mv.addObject("result", filmUpdate);
 		mv.setViewName("WEB-INF/search.jsp"); // redirect to new mapping
 		return mv;
 	}
