@@ -30,22 +30,12 @@ public class filmController {
 		return mv;
 	}
 
-//	@RequestMapping(path = "add.do", params = "data", method = RequestMethod.GET)
-//	public ModelAndView createFilm(@RequestParam("data") Film film) {
-//		ModelAndView mv = new ModelAndView();
-//		Film f = da.createFilm(film);
-//		mv.addObject("result", f);
-//		mv.setViewName("WEB-INF/search.jsp");
-//		return mv;
-//	}
-
 	@RequestMapping(path = "add.do", method = RequestMethod.POST)
 	public ModelAndView addFilm(Film film) {
 		Film filmAdd = dao.createFilm(film);
 		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("WEB-INF/addVideo.jsp");
 		mv.addObject("result", filmAdd);
-		mv.setViewName("WEB-INF/search.jsp"); // redirect to new mapping
+		mv.setViewName("WEB-INF/search.jsp"); 
 		return mv;
 	}
 
@@ -56,30 +46,36 @@ public class filmController {
 		boolean filmDelete = dao.deleteFilm(filmIdDelete);
 		System.out.println(filmDelete);
 		ModelAndView mv = new ModelAndView();
+		
+		if (filmDelete) {
+			mv.setViewName("WEB-INF/updateSuccessful.jsp");
+		} else {
+			mv.setViewName("WEB-INF/updateNotSuccessful.jsp");
+		}
+		
+		
 //		mv.setViewName("WEB-INF/addVideo.jsp");
 //		mv.addObject("result", filmDelete);
-		mv.setViewName("index.html"); // redirect to new mapping
+		 // CHANGEDR RIGHT ERE
 		return mv;
 	}
 
-	@RequestMapping(path = "getFilmToUpdate.do", method = RequestMethod.GET)
-	public ModelAndView getFilmToUpdate(int filmId) {
-		Film foundFilm = dao.findFilmById(filmId);
-		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("WEB-INF/addVideo.jsp");
-		mv.addObject("result", foundFilm);
-		mv.setViewName("WEB-INF/updateFilm.jsp"); // redirect to new mapping
-		return mv;
-	}
-//
+//	@RequestMapping(path = "getFilmToUpdate.do", method = RequestMethod.GET)
+//	public ModelAndView getFilmToUpdate(int filmId) {
+//		Film foundFilm = dao.findFilmById(filmId);
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("result", foundFilm);
+//		mv.setViewName("WEB-INF/updateFilm.jsp"); // uhm,what???
+//		return mv;
+//	}
+
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(Film film) {
 		System.out.println("update.do to zero?"+ film);
 		Film filmUpdate = dao.updateFilm(film);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("result", filmUpdate);
-		mv.setViewName("index.html"); 
-		mv.setViewName("WEB-INF/search.jsp"); 
+		mv.setViewName("WEB-INF/updateSuccessful.jsp"); 
 		return mv;
 	}
 
