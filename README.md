@@ -14,14 +14,23 @@ To add a film the user has to click "add a video" button on the index or homepag
 
 
 ### Technologies
-SpringToolSuite4: this was our IDE that we wrote the code in
-MySQLWorkbench: this was alternative to terminal in order to access the database
-Bootstrap: provides a nice template to make the html display nicely
-CSS
-HTML
+* *SpringToolSuite4* - This was the IDE that we wrote the code in.
 
+* *MySQLWorkbench* - This was an alternative to terminal in order to access the database.
+
+* *Bootstrap* - Provides a nice template to make the html display nicely on both a desktop and mobile device.
+
+* *CSS* - Used to make some minor changes to margins, padding, colors, etc, to aid in interface design.
+
+* *Database Accessor Objects* - Additional DAO's were needed to be created in order to create, update, and delete films.  Some reorganization was needed from the prior weeks project in order for the program to work properly.
+
+* *RequestMapping and Controllers* - This was an important addition to the project in order to update the database and reroute to an appropriate page.  `mv.addObject("result", film)` was used to add and object to a .jsp page, and `mv.setViewName("WEB-INF/search.jsp")` was used to redirect to the page.
+
+* *JavaServer Pages Standard Tag Library (JSTL)* - In order to print a list on the .jsp page, a <c:foreach> tag was needed.  Also, there were a few instances were <c:if> tags were utilized.
 
 ### Lessons Learned
+A big lesson learned was how film controllers worked.  The project emphasised the difference between `GET` and `SET`.  It also allowed us to understand ModelAndView better.
+
 Auto generated IDs can be hidden sometimes.
 
 It helps to do a Gradle refresh and project refresh to make sure all changes take effect.
