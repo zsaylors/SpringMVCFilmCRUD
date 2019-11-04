@@ -19,6 +19,7 @@
 </head>
 
 <body>
+<!-- PAGE HEADER -->
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
 		<a class="navbar-brand" href="index.html"> <img class="title__img"
 			src="imdb2.png">
@@ -26,10 +27,11 @@
 	</nav>
 
 	<div class="container">
-	<br>
-	<div class="alert alert-success" role="alert"> The changes were made successfully! </div>
-	<a class="btn btn-outline-dark"
-					href="index.html"> Return Home </a>
+		<br>
+
+<!-- ALERT AND RETURN TO HOME BUTTON -->
+		<div class="alert alert-success" role="alert">The changes were made successfully!</div>
+		<a class="btn btn-outline-dark" href="index.html"> Return Home </a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

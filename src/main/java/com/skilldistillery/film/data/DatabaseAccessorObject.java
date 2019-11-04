@@ -15,8 +15,6 @@ import com.skilldistillery.film.entities.Inventory;
 import com.skilldistillery.film.entities.Store;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
-	// private static final String URL =
-	// "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false";
 	private String user = "student";
 	private String pass = "student";
@@ -32,6 +30,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// STANDARD SQL STRING FOR ALL FILMS
 	// Note: Specific where statements are concatenated in their respective methods.
 	// added to not repeat and ease to edit in future.
+	// commented out code works for last homework assignment but not this one.
 	private String setSql() {
 		return "select * FROM film ";
 //				+ 
@@ -60,7 +59,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		film.setFilmActors(findActorsByFilmId(filmId));
 		film.setCategory(findCategoryById(filmId));
 //		film.setActorList(findActorsByFilmId(filmId));
-
 //		film.setLanguage(rs.getString("language.name"));
 //		film.setCategory(rs.getString("category.name"));
 		return film;
@@ -157,6 +155,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actors;
 	}
 
+	// FINDS THE FILM CATEGORY BY ID.
+	// Had to be removed from first method to work with part 2 of film query project.
 	public String findCategoryById(int filmId) {
 		String category = "none";
 		String sql = "SELECT category.name FROM film_category\n" + "JOIN film ON film.id = film_category.film_id\n"
@@ -185,11 +185,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public List<Inventory> findInventory(int filmId) {
 		List<Inventory> inventory = new ArrayList<>();
 		Inventory inv = null;
-		String sql = "SELECT * FROM inventory_item " + "JOIN film ON film.id = inventory_item.film_id \n" // adds
-																											// inventory.
-																											// May need
-																											// it's own
-																											// method.
+		String sql = "SELECT * FROM inventory_item " + "JOIN film ON film.id = inventory_item.film_id \n"																							
 				+ "JOIN store_list ON store_list.store_id = inventory_item.store_id\n" + "WHERE film.id = ?";
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -234,9 +230,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return store;
 	}
 
+	
 	// FILM QUERY PROJECT CONTINUED - WEEK 2
 	// ORM for DML Lab
-
+	
+	// CREATE FILM
 	public Film createFilm(Film film) {
 		Connection conn = null;
 		try {
@@ -261,7 +259,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				if (keys.next()) {
 					int newFilmId = keys.getInt(1);
 					film.setId(newFilmId);
-					System.out.println("New film ID: " + newFilmId);
+					System.out.println("New Film ID: " + film.getId());  // Test sysout for film ID
 				}
 			} else {
 				film = null;
@@ -278,10 +276,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			throw new RuntimeException("Error inserting actor " + film);
 		}
-		System.out.println("new film id=" + film.getId() + "*********");
 		return film;
 	}
 
+	// DELETE FILM
 	public boolean deleteFilm(int filmid) {
 		Connection conn = null;
 		try {
@@ -296,7 +294,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, filmid);
 			updateCount = stmt.executeUpdate();
 			conn.commit();
-			System.out.println("****after execute***");
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -311,6 +308,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return true;
 	}
 
+	// UPDATES THE FILM.  
 	public Film updateFilm(Film film) {
 		Connection conn = null;
 		try {
@@ -345,9 +343,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			System.out.println(film.getId() + "&&&");
+			System.out.println("Film ID: " + film.getId());  // Test sysout for film ID
 			return film;
 		}
+		System.out.println("Film ID: " + film.getId());  // Test sysout for film ID
 		return film;
 	}
 }

@@ -8,7 +8,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="style.css">
@@ -16,13 +16,15 @@
 </head>
 
 <body id="home__page">
-	<!-- NAVBAR - currently only has title image -->
+
+<!-- NAVBAR - currently only has title image -->
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
 		<a class="navbar-brand" href="#"> <img class="title__img"
 			src="imdb2.png">
 		</a>
 	</nav>
 
+<!-- SEARCH BAR DIV - contains search by id, keyword, and add film -->
 	<div class="container search__box text-center" id="myGroup">
 		<div class="container" id=myGroup>
 			<p>
@@ -39,20 +41,22 @@
 					Add a video</button>
 			</p>
 
+	<!-- SEARCH BY ID -->
 			<div class="collapse show" id="collapseExample"
 				data-parent="#myGroup">
 				<div class="card card-body">
 					<form action="route.do" method="GET" id="sbd">
 						<div class="input-group">
-							<input class="form-control" type="number" name="data"
-								placeholder="Search by ID"> <span
-								class="input-group-btn"> <input
-								class="btn btn-outline-success" type="submit" value="Submit" />
+							<input class="form-control" type="number" min="1" max="2147483647" name="data" placeholder="Search by ID" required> 
+							<span class="input-group-btn">
+								<input class="btn btn-outline-success" type="submit" value="Submit">
 							</span>
 						</div>
 					</form>
 				</div>
 			</div>
+			
+	<!-- SEARCH BY KEYWORD -->	
 			<div class="collapse" id="collapseExample2" data-parent="#myGroup">
 				<div class="card card-body">
 					<form action="search.do" method="GET" id="sbk">
@@ -66,17 +70,15 @@
 					</form>
 				</div>
 			</div>
+			
+	<!-- ADD FILM -->	
 			<div class="collapse" id="collapseExample3" data-parent="#myGroup">
 				<div class="card card-body">
 					<form action="add.do" method="POST">
 
-						<input class="form-control" type="text" name="title"
-							placeholder="Title" required><br> <input
-							class="form-control" type="text" name="description"
-							placeholder="Description"><br> <input
-							class="form-control" type="number" min="1888"
-							max="2019" name="releaseYear" placeholder="Release Year" required><br>
-						<!--      <input class="form-control add__form" type="number" name="languageId" placeholder="Language Id"><br> -->
+						<input class="form-control" type="text" name="title" placeholder="Title" required><br> 
+						<input class="form-control" type="text" name="description" placeholder="Description"><br> 
+						<input class="form-control" type="number" min="1888" max="2019" name="releaseYear" placeholder="Release Year" required><br>
 						<div class="form-group">
 							<select name="languageId" class="form-control">
 								<option value="1">English</option>
@@ -87,16 +89,10 @@
 								<option value="6">German</option>
 							</select>
 						</div>
-						<input class="form-control" type="number" min="1"
-							max="7" name="rentalDuration" placeholder="Rental Duration"
-							required><br> 
-						<input class="form-control"
-							type="number" step="any" min="0" name="rentalRate" placeholder="Rental Rate"
-							required><br> 
-						<input class="form-control"
-							type="number" min="1" name="length" placeholder="Length" required><br>
-						<input class="form-control" type="number" step="any" min="0"
-							name="replacementCost" placeholder="Replacement Cost" required><br>
+						<input class="form-control" type="number" min="1" max="7" name="rentalDuration" placeholder="Rental Duration" required><br> 
+						<input class="form-control" type="number" step="any" min="0" max="99.99" name="rentalRate" placeholder="Rental Rate" required><br> 
+						<input class="form-control" type="number" min="1" max="51420" name="length" placeholder="Length" required><br>
+						<input class="form-control" type="number" step="any" min="0" max="999.99" name="replacementCost" placeholder="Replacement Cost" required><br>
 						<div class="form-group">
 							<select name="rating" class="form-control">
 								<option value="G">G</option>
@@ -106,26 +102,22 @@
 								<option value="NC17">NC-17</option>
 							</select>
 						</div>
-<!-- 						<input class="form-control" type="text" name="specialFeatures"
-							placeholder="Special Features"><br>  -->
 						Special Features:<br>
 							<input type="checkbox" name="specialFeatures" value="Trailers"> Trailers  
 							<input type="checkbox" name="specialFeatures" value="Commentaries"> Commentaries  
 							<input type="checkbox" name="specialFeatures" value="Deleted Scenes"> Deleted Scenes  
 							<input type="checkbox" name="specialFeatures" value="Behind the Scenes"> Behind the Scenes
-							
 							<br>
-						
-							
-							
-							
 							<input
 							class="btn btn-outline-success" type="submit" value="Submit"><br />
 					</form>
 				</div>
 			</div>
+			
+			
 		</div>
 	</div>
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

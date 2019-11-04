@@ -19,6 +19,8 @@
 </head>
 
 <body>
+
+<!-- NAV -->
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
 		<a class="navbar-brand" href="index.html"> <img class="title__img"
 			src="imdb2.png">
@@ -26,10 +28,11 @@
 	</nav>
 
 	<div class="container">
+	
+<!-- ALERT AND RETURN TO HOME BUTTON -->
 	<br>
 	<div class="alert alert-danger" role="alert">Film not found! Try again.</div>
-			<a class="btn btn-outline-dark"
-					href="index.html"> Return Home </a>
+		<a class="btn btn-outline-dark" href="index.html"> Return Home </a>
 	</div>
 
 

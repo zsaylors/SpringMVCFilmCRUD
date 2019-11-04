@@ -19,17 +19,17 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
-		<a class="navbar-brand" href="index.html"> <img class="title__img"
-			src="imdb2.png">
-		</a>
+<!-- NAV -->
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top"> 
+		<a class="navbar-brand" href="index.html"> <img class="title__img" src="imdb2.png"> </a>
 	</nav>
 
 	<div class="container">
 	<br>
+	
+<!-- ALERT AND RETURN TO HOME BUTTON -->
 	<div class="alert alert-danger" role="alert">The film was unable to be deleted since it is a default database film.</div>
-			<a class="btn btn-outline-dark"
-					href="index.html"> Return Home </a>
+	<a class="btn btn-outline-dark" href="index.html"> Return Home </a>
 	</div>
 
 

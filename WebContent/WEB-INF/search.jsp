@@ -20,24 +20,23 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
-		<a class="navbar-brand" href="index.html"> <img class="title__img"
-			src="imdb2.png">
-		</a>
+		<a class="navbar-brand" href="index.html"> <img class="title__img" src="imdb2.png"> </a>
 	</nav>
 
 	<div class="container">
+	
+<!-- THE FOLLOWING PRINTS FOR SEARCH BY KEWORD -->
 		<c:forEach items="${results}" var="result">
-						<div class="container cont__style" style="margin-top: 15px">
+			<div class="container cont__style" style="margin-top: 15px">
 				<div class="row">
+	<!-- START LEFT SIDE (ON WIDE SCREENS) OF FILM DISPLAY -->
 					<div class="col-sm">
-						<h1>
-							<strong> ${result.title} </strong>
-						</h1>
+						<h1><strong> ${result.title} </strong></h1>
+						
 						<h2>${result.description}</h2>
-						<h3>
-							<span class="badge badge-dark">${result.rating}</span>
-						</h3>
-
+						
+						<h3><span class="badge badge-dark"> ${result.rating} </span></h3>
+						
 						<div class="style__box shadow-lg">
 							<strong>Staring:</strong><br>
 							<c:forEach items="${result.filmActors}" var="actor">
@@ -45,15 +44,20 @@
 									${actor.lastName} </span>
 							</c:forEach>
 						</div>
+						
 						<div class="style__box shadow-lg">
 							<strong>Special Features:</strong><br>
 							${result.specialFeatures}
 						</div>
+						
 						<div class="style__box shadow-lg" style="margin-bottom: 20px">
 							<strong>Category</strong><br> <span class="badge badge-info">
 								${result.category} </span>
 						</div>
+						
 					</div>
+					
+	<!-- START RIGHT SIDE (ON WIDE SCREENS) OF FILM DISPLAY -->
 					<div class="col-sm">
 						<table class="table">
 							<tr>
@@ -84,7 +88,7 @@
 					</div>
 				</div>
 
-			
+	<!-- BOTTOM BUTTONS TO EDIT OR DELETE -->	
 			<div class="text-center">
 				<div class="btn-group">
 					<form action="delete.do" method="POST" class="bottom__buttons">
@@ -99,69 +103,62 @@
 					</div>
 				</div>
 			</div>
+			
+		<!-- UPDATE FORM -->
 			<div class="collapse" id="collapseUpdateFilm">
 				<div class="card card-body">
 					<form action="update.do" method="POST">
-						<input type="hidden" name="id" value="${result.id}" /> Title <input
-							class="form-control add__form" type="text" name="title"
-							value="${result.title}" required /><br> Description<input
-							class="form-control add__form" type="text" name="description"
-							value="${result.description}" /><br> Release Year <input
-							class="form-control add__form" type="number" name="releaseYear"
-							value="${result.releaseYear}" required /><br> Language Id<input
-							class="form-control add__form" type="number" name="languageId"
-							value="${result.languageId}" required /><br> Rental Duration<input
-							class="form-control add__form" type="number"
-							name="rentalDuration" value="${result.rentalDuration}" required /><br>
-						Rental Rate<input class="form-control add__form" name="rentalRate"
-							value="${result.rentalRate}" required /><br> Length<input
-							class="form-control add__form" type="number" name="length"
-							required value="${result.length}" required /><br>
-						Replacement Cost<input class="form-control add__form"
-							name="replacementCost" value="${result.replacementCost}" required /><br>
-						Rating<input class="form-control add__form" type="text"
-							name="rating" value="${result.rating}" /><br> Special
-						Features<input class="form-control add__form" type="text"
-							name="specialFeatures" value="${result.specialFeatures}" /><br>
-						<input class="btn btn-outline-success" type="submit"
-							value="Submit" /><br />
+						<input type="hidden" name="id" value="${result.id}"> 
+						Title <input class="form-control add__form" type="text" name="title" value="${result.title}" required><br>
+						Description <input class="form-control add__form" type="text" name="description" value="${result.description}"><br> 
+						Release Year <input class="form-control add__form" type="number" name="releaseYear" value="${result.releaseYear}" required><br>
+						Language Id<input class="form-control add__form" type="number" name="languageId" value="${result.languageId}" required><br>
+						Rental Duration<input class="form-control add__form" type="number" name="rentalDuration" value="${result.rentalDuration}" required><br>
+						Rental Rate<input class="form-control add__form" name="rentalRate" value="${result.rentalRate}" required><br>
+						Length<input class="form-control add__form" type="number" name="length" required value="${result.length}" required><br>
+						Replacement Cost<input class="form-control add__form" name="replacementCost" value="${result.replacementCost}" required><br>
+						Rating<input class="form-control add__form" type="text" name="rating" value="${result.rating}"><br>
+						Special Features<input class="form-control add__form" type="text" name="specialFeatures" value="${result.specialFeatures}"><br>
+						<input class="btn btn-outline-success" type="submit" value="Submit"><br>
 					</form>
 				</div>
 			</div>
-			</div>
+		</div>
 		</c:forEach>
 
 
-<!-- THIS IS THE BEGIN TO GET BY ID -->
-		<%-- <p>The result is: ${result.title}</p> --%>
+
+<!-- THIS STARTS HTML AND CODE FOR GETTING FILM BY ID -->
 		<c:if test="${result.title != null}">
 			<div class="container" style="margin-top: 15px">
 				<div class="row">
+	<!-- START LEFT SIDE (ON WIDE SCREENS) OF FILM DISPLAY -->		
 					<div class="col-sm">
-						<h1>
-							<strong> ${result.title} </strong>
-						</h1>
+						<h1><strong> ${result.title} </strong></h1>
+						
 						<h2>${result.description}</h2>
-						<h3>
-							<span class="badge badge-dark">${result.rating}</span>
-						</h3>
+						
+						<h3><span class="badge badge-dark"> ${result.rating} </span></h3>
 
 						<div class="style__box shadow-lg">
 							<strong>Staring:</strong><br>
 							<c:forEach items="${result.filmActors}" var="actor">
-								<span class="badge badge-secondary"> ${actor.firstName}
-									${actor.lastName} </span>
+								<span class="badge badge-secondary"> ${actor.firstName} ${actor.lastName} </span>
 							</c:forEach>
 						</div>
+						
 						<div class="style__box shadow-lg">
 							<strong>Special Features:</strong><br>
 							${result.specialFeatures}
 						</div>
+						
 						<div class="style__box shadow-lg" style="margin-bottom: 20px">
 							<strong>Category</strong><br> <span class="badge badge-info">
 								${result.category} </span>
 						</div>
 					</div>
+					
+	<!-- START RIGHT SIDE (ON WIDE SCREENS) OF FILM DISPLAY -->
 					<div class="col-sm">
 						<table class="table">
 							<tr>
@@ -193,6 +190,7 @@
 				</div>
 			</div>
 
+	<!-- BOTTOM BUTTONS TO EDIT OR DELETE -->	
 			<div class="text-center">
 				<div class="btn-group">
 					<form action="delete.do" method="POST" class="bottom__buttons">
@@ -207,6 +205,8 @@
 					</div>
 				</div>
 			</div>
+			
+		<!-- UPDATE FORM -->
 			<div class="collapse" id="collapseUpdateFilm">
 				<div class="card card-body">
 					<form action="update.do" method="POST">
