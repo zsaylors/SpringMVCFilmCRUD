@@ -1,7 +1,7 @@
 ## Spring MVC Film C.R.U.D. Project
 
 See the project at:
-http://3.132.170.184:8080/MVCFilmSite
+[Click to see the project](http://3.132.170.184:8080/MVCFilmSite)
 
 ### Overview
 The purpose of this project is to have a web enabled app that can access a database related to films. So we decided to name it IMDb2. The app needed to be able to Create, Read, Update, and Delete (CRUD) entries in the database.
