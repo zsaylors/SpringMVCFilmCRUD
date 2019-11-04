@@ -30,7 +30,11 @@
 		<br>
 
 <!-- ALERT AND RETURN TO HOME BUTTON -->
-		<div class="alert alert-success" role="alert">The changes were made successfully!</div>
+		<div class="alert alert-success" role="alert">Success! 
+			<c:if test="${result.id != 0}">
+				<strong>${result.title} (ID ${result.id}) </strong>has been updated or created!
+			</c:if>
+		</div>
 		<a class="btn btn-outline-dark" href="index.html"> Return Home </a>
 	</div>
 

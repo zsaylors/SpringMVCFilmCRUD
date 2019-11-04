@@ -37,23 +37,28 @@
 						
 						<h3><span class="badge badge-dark"> ${result.rating} </span></h3>
 						
+						<c:if test="${result.filmActors != '[]'}">
 						<div class="style__box shadow-lg">
 							<strong>Staring:</strong><br>
 							<c:forEach items="${result.filmActors}" var="actor">
-								<span class="badge badge-secondary"> ${actor.firstName}
-									${actor.lastName} </span>
+								<span class="badge badge-secondary"> ${actor.firstName} ${actor.lastName} </span>
 							</c:forEach>
 						</div>
+						</c:if>
 						
+						<c:if test="${result.specialFeatures != null}">
 						<div class="style__box shadow-lg">
 							<strong>Special Features:</strong><br>
 							${result.specialFeatures}
 						</div>
+						</c:if>
 						
+						<c:if test="${result.category != ''}">
 						<div class="style__box shadow-lg" style="margin-bottom: 20px">
 							<strong>Category</strong><br> <span class="badge badge-info">
 								${result.category} </span>
 						</div>
+						</c:if>
 						
 					</div>
 					
@@ -61,13 +66,21 @@
 					<div class="col-sm">
 						<table class="table">
 							<tr>
+								<td class="desc shadow">Database Film ID</td>
+								<td class="dec_c shadow">${result.id}</td>
+							</tr>
+							<tr>
 								<td class="desc shadow">Release Year</td>
 								<td class="dec_c shadow">${result.releaseYear}</td>
 							</tr>
-							<tr>
+<%-- 							<tr>
 								<td class="desc shadow">Language Id</td>
 								<td class="dec_c shadow">${result.languageId}</td>
-							</tr>
+							</tr> --%>
+							<tr>
+								<td class="desc shadow">Language</td>
+								<td class="dec_c shadow">${result.language}</td>
+							</tr>							
 							<tr>
 								<td class="desc shadow">Rental Duration</td>
 								<td class="dec_c shadow">${result.rentalDuration}</td>
@@ -97,7 +110,7 @@
 					</form>
 					<div>
 						<button class="btn btn-secondary bottom__buttons" type="button"
-							data-toggle="collapse" data-target="#collapseUpdateFilm"
+							data-toggle="collapse" data-target="#collapseUpdateFilm${result.id}"
 							aria-expanded="false" aria-controls="collapseExample">
 							Update film</button>
 					</div>
@@ -105,7 +118,7 @@
 			</div>
 			
 		<!-- UPDATE FORM -->
-			<div class="collapse" id="collapseUpdateFilm">
+			<div class="collapse" id="collapseUpdateFilm${result.id}">
 				<div class="card card-body">
 					<form action="update.do" method="POST">
 						<input type="hidden" name="id" value="${result.id}"> 
@@ -140,34 +153,48 @@
 						
 						<h3><span class="badge badge-dark"> ${result.rating} </span></h3>
 
+						<c:if test="${result.filmActors != '[]'}">
 						<div class="style__box shadow-lg">
 							<strong>Staring:</strong><br>
 							<c:forEach items="${result.filmActors}" var="actor">
 								<span class="badge badge-secondary"> ${actor.firstName} ${actor.lastName} </span>
 							</c:forEach>
 						</div>
+						</c:if>
 						
+						<c:if test="${result.specialFeatures != null}">
 						<div class="style__box shadow-lg">
 							<strong>Special Features:</strong><br>
 							${result.specialFeatures}
 						</div>
+						</c:if>
 						
+						<c:if test="${result.category != ''}">
 						<div class="style__box shadow-lg" style="margin-bottom: 20px">
 							<strong>Category</strong><br> <span class="badge badge-info">
 								${result.category} </span>
 						</div>
+						</c:if>
 					</div>
 					
 	<!-- START RIGHT SIDE (ON WIDE SCREENS) OF FILM DISPLAY -->
 					<div class="col-sm">
 						<table class="table">
 							<tr>
+								<td class="desc shadow">Database Film ID</td>
+								<td class="dec_c shadow">${result.id}</td>
+							</tr>
+							<tr>
 								<td class="desc shadow">Release Year</td>
 								<td class="dec_c shadow">${result.releaseYear}</td>
 							</tr>
-							<tr>
+<%-- 							<tr>
 								<td class="desc shadow">Language Id</td>
 								<td class="dec_c shadow">${result.languageId}</td>
+							</tr> --%>
+							<tr>
+								<td class="desc shadow">Language</td>
+								<td class="dec_c shadow">${result.language}</td>
 							</tr>
 							<tr>
 								<td class="desc shadow">Rental Duration</td>
@@ -213,12 +240,12 @@
 						<input type="hidden" name="id" value="${result.id}"> 
 						Title <input class="form-control" type="text" name="title" value="${result.title}" required><br> 
 						Description <input class="form-control" type="text" name="description" value="${result.description}"><br>
-					 	Release Year <input class="form-control" type="number" name="releaseYear" value="${result.releaseYear}" required><br> 
+					 	Release Year <input class="form-control" type="number" name="releaseYear" min="0" max="2147483647" value="${result.releaseYear}" required><br> 
 						Language Id<input class="form-control" type="number" name="languageId" min="1" max="6" value="${result.languageId}" required ><br>	
-						Rental Duration<input class="form-control" type="number" name="rentalDuration" value="${result.rentalDuration}" required><br>
-						Rental Rate<input class="form-control" type="number" step="any" name="rentalRate" value="${result.rentalRate}" required><br> 
-						Length<input class="form-control" type="number" name="length" required value="${result.length}" required><br>
-						Replacement Cost<input class="form-control" type="number" step="any" name="replacementCost" value="${result.replacementCost}" required><br>
+						Rental Duration<input class="form-control" type="number" min="0" max="2147483647" name="rentalDuration" value="${result.rentalDuration}" required><br>
+						Rental Rate<input class="form-control" type="number" step="any" min="0" max="2147483647" name="rentalRate" value="${result.rentalRate}" required><br> 
+						Length<input class="form-control" type="number" name="length" min="0" max="2147483647" value="${result.length}" required><br>
+						Replacement Cost<input class="form-control" type="number" step="any" min="0" max="2147483647" name="replacementCost" value="${result.replacementCost}" required><br>
 						Rating<input class="form-control" type="text" name="rating" value="${result.rating}"><br>
 						Special Features<input class="form-control" type="text" name="specialFeatures" value="${result.specialFeatures}"><br>
 						<input class="btn btn-outline-success" type="submit" value="Submit"><br>

@@ -60,7 +60,7 @@ public class filmController {
 		ModelAndView mv = new ModelAndView();
 		if (filmAdd) {
 			mv.addObject("result", film);
-			mv.setViewName("WEB-INF/search.jsp"); 
+			mv.setViewName("WEB-INF/updateSuccessful.jsp");
 		} else {
 			mv.setViewName("WEB-INF/updateNotSuccessful.jsp");
 		}
@@ -75,7 +75,7 @@ public class filmController {
 		ModelAndView mv = new ModelAndView();
 		if (filmDelete) {
 			mv.setViewName("WEB-INF/updateSuccessful.jsp");
-//			mv.addObject("result", filmDelete); // not sure if needed now that we are not redirecting back to search.jsp?
+			mv.addObject("result", film);
 		} else {
 			mv.setViewName("WEB-INF/updateNotSuccessful.jsp");
 		}
@@ -91,7 +91,7 @@ public class filmController {
 		boolean filmUpdate = dao.updateFilm(film);
 		ModelAndView mv = new ModelAndView();
 		if (filmUpdate) { 
-//			mv.addObject("result", filmUpdate);
+			mv.addObject("result", film);
 			mv.setViewName("WEB-INF/updateSuccessful.jsp");											
 		} else {
 			mv.setViewName("WEB-INF/updateNotSuccessful.jsp"); 

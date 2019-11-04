@@ -58,6 +58,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		film.setSpecialFeatures(rs.getString("special_features"));
 		film.setFilmActors(findActorsByFilmId(filmId));
 		film.setCategory(findCategoryById(filmId));
+		film.setLanguage(findLanguageById(filmId));
 //		film.setActorList(findActorsByFilmId(filmId));
 //		film.setLanguage(rs.getString("language.name"));
 //		film.setCategory(rs.getString("category.name"));
@@ -158,7 +159,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// FINDS THE FILM CATEGORY BY ID.
 	// Had to be removed from first method to work with part 2 of film query project.
 	public String findCategoryById(int filmId) {
-		String category = "none";
+		String category = "";
 		String sql = "SELECT category.name FROM film_category\n" + "JOIN film ON film.id = film_category.film_id\n"
 				+ "JOIN category ON film_category.category_id = category.id \n" + "WHERE film.id = ?";
 		try {
@@ -178,6 +179,29 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return category;
 	}
+	
+	public String findLanguageById(int filmId) {
+		String language = "";
+		String sql = "SELECT name FROM language JOIN film ON film.language_id = language.id WHERE film.id = ?";
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				language = rs.getString("name");
+
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("print something if error");
+		}
+		return language;
+	}
+	
 
 	// CREATES AN INVENTORY LIST SPECIFIC TO A FILM.
 	// This is used in the sub menu (option 2) in FilmQueryApp. Prints all film
@@ -259,7 +283,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				if (keys.next()) {
 					int newFilmId = keys.getInt(1);
 					film.setId(newFilmId);
-					System.out.println("New Film ID: " + film.getId());  // Test sysout for film ID
 				}
 			} else {
 				film = null;
@@ -274,7 +297,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			//throw new RuntimeException("Error inserting actor " + film);
 			return false;
 		}
 		return true;
