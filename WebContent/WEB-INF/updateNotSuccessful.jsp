@@ -19,6 +19,7 @@
 </head>
 
 <body>
+
 <!-- NAV -->
 	<nav class="navbar navbar-expand-lg navbar-light sticky-top"> 
 		<a class="navbar-brand" href="index.html"> <img class="title__img" src="imdb2.png"> </a>
@@ -28,7 +29,10 @@
 	<br>
 	
 <!-- ALERT AND RETURN TO HOME BUTTON -->
-	<div class="alert alert-danger" role="alert">The film was unable to be deleted since it is a default database film.</div>
+	<div class="alert alert-danger" role="alert">
+	The film was not able to be created, updated, or deleted because:<br>
+	1.  Input was out of range, or<br>
+	2.  The film is a default database film and cannot be deleted.</div>
 	<a class="btn btn-outline-dark" href="index.html"> Return Home </a>
 	</div>
 

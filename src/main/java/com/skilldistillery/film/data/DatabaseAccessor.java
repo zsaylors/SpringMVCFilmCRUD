@@ -15,6 +15,6 @@ public interface DatabaseAccessor {
 	  public List<Inventory> findInventory(int filmId);
 	  public Store findStores(int storeId);
 	  public boolean deleteFilm(int filmid);
-	  public Film createFilm(Film film);
-	  public Film updateFilm(Film film);
+	  public boolean createFilm(Film film);
+	  public boolean updateFilm(Film film);
 }

@@ -235,7 +235,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// ORM for DML Lab
 	
 	// CREATE FILM
-	public Film createFilm(Film film) {
+	public boolean createFilm(Film film) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
@@ -274,9 +274,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			throw new RuntimeException("Error inserting actor " + film);
+			//throw new RuntimeException("Error inserting actor " + film);
+			return false;
 		}
-		return film;
+		return true;
 	}
 
 	// DELETE FILM
@@ -309,7 +310,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	// UPDATES THE FILM.  
-	public Film updateFilm(Film film) {
+	public boolean updateFilm(Film film) {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
@@ -343,10 +344,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			System.out.println("Film ID: " + film.getId());  // Test sysout for film ID
-			return film;
+			System.out.println("Film ID - update failed: " + film.getId());  // Test sysout for film ID
+			return false;
 		}
-		System.out.println("Film ID: " + film.getId());  // Test sysout for film ID
-		return film;
+		System.out.println("Film ID - update success: " + film.getId());  // Test sysout for film ID
+		return true;
 	}
 }

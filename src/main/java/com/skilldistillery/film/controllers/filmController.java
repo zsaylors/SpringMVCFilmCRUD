@@ -56,10 +56,14 @@ public class filmController {
 	// Note that currently actors and category will show nothing on the search.jsp page.
 	@RequestMapping(path = "add.do", method = RequestMethod.POST)
 	public ModelAndView addFilm(Film film) {
-		Film filmAdd = dao.createFilm(film);
+		boolean filmAdd = dao.createFilm(film);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("result", filmAdd);
-		mv.setViewName("WEB-INF/search.jsp"); 
+		if (filmAdd) {
+			mv.addObject("result", film);
+			mv.setViewName("WEB-INF/search.jsp"); 
+		} else {
+			mv.setViewName("WEB-INF/updateNotSuccessful.jsp");
+		}
 		return mv;
 	}
 
@@ -84,10 +88,14 @@ public class filmController {
 	// the illusion that they were deleted for now.
 	@RequestMapping(path = "update.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(Film film) {
-		Film filmUpdate = dao.updateFilm(film);
+		boolean filmUpdate = dao.updateFilm(film);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("result", filmUpdate);
-		mv.setViewName("WEB-INF/updateSuccessful.jsp"); 
+		if (filmUpdate) { 
+//			mv.addObject("result", filmUpdate);
+			mv.setViewName("WEB-INF/updateSuccessful.jsp");											
+		} else {
+			mv.setViewName("WEB-INF/updateNotSuccessful.jsp"); 
+		} 
 		return mv;
 	}
 }
